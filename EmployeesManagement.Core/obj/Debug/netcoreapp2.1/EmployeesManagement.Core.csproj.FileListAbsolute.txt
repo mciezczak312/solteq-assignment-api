@@ -1,0 +1,9 @@
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\bin\Debug\netcoreapp2.1\EmployeesManagement.Core.deps.json
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\bin\Debug\netcoreapp2.1\EmployeesManagement.Core.dll
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\bin\Debug\netcoreapp2.1\EmployeesManagement.Core.pdb
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.csprojAssemblyReference.cache
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.csproj.CoreCompileInputs.cache
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.AssemblyInfoInputs.cache
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.AssemblyInfo.cs
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.dll
+C:\Users\mciez\Documents\repos\solteq-assignment\api\EmployeesManagement\EmployeesManagement.Core\obj\Debug\netcoreapp2.1\EmployeesManagement.Core.pdb
