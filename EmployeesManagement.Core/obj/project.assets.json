@@ -687,11 +687,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj",
+      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj",
       "projectName": "EmployeesManagement.Core",
-      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj",
+      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj",
       "packagesPath": "C:\\Users\\mciez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Core\\obj\\",
+      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

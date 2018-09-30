@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EmployeesManagement.Core.Entitites
+namespace EmployeesManagement.Core.Entities
 {
     public class Salary : BaseEntity
     {

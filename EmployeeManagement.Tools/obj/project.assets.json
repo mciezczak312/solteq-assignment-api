@@ -2042,11 +2042,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeeManagement.Tools\\EmployeeManagement.Tools.csproj",
+      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeeManagement.Tools\\EmployeeManagement.Tools.csproj",
       "projectName": "EmployeeManagement.Tools",
-      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeeManagement.Tools\\EmployeeManagement.Tools.csproj",
+      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeeManagement.Tools\\EmployeeManagement.Tools.csproj",
       "packagesPath": "C:\\Users\\mciez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeeManagement.Tools\\obj\\",
+      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeeManagement.Tools\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -2065,8 +2065,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj"
+            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj"
             }
           }
         }

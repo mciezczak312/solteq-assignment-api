@@ -1,5 +1,5 @@
 ﻿using EmployeesManagement.API.Interfaces;
-using EmployeesManagement.Core.Entitites;
+using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Core.Interfaces;
 using System;
 using System.Collections.Generic;

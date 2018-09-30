@@ -1,32 +1,84 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Employees Management System API",
-    "version": "1.0.0"
+    "description": "",
+    "version": "1.0.0",
+    "title": "EMS"
   },
-  "basePath": "/v1",
+  "host": "http://solteq-assignment.mciezczak.pl:9000",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Employees",
+      "description": "Employees endpoints"
+    },
+    {
+      "name": "Stats",
+      "description": "Access to employees statistics like average salary"
+    },
+    {
+      "name": "User",
+      "description": "Authentication endpoint"
+    }
+  ],
   "schemes": [
     "http"
   ],
+  "components": null,
+  "securitySchemes": {
+    "bearerAuth": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
   "paths": {
-    "/employees": {
+    "/employee/{employeeId}": {
       "get": {
-        "summary": "Returns a list of all employees.",
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Find employee by ID",
+        "description": "Returns a single employee object",
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of employee to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "A Json array of employee objects.",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AllEmployees"
+              "$ref": "#/definitions/Employee"
             }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Employee not found"
           }
         }
       },
       "post": {
-        "summary": "Add a new employees to the database",
-        "description": "Add a new employees to the database and returns id of enwly created object",
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Add a new employee to the database",
+        "description": "",
         "consumes": [
           "application/json"
         ],
@@ -40,139 +92,190 @@
             "description": "Employee object that needs to be added to the database",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmployeeModelAdd"
+              "$ref": "#/definitions/Employee"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Ok",
-            "type": "string",
-            "example": "ID"
+            "description": "Employee added"
           },
           "405": {
             "description": "Invalid input"
           }
         }
-      }
-    },
-    "/employees/{id}": {
-      "get": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "description": "The employee ID"
-          }
-        ],
-        "summary": "Returns single employees data from Database",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "A single employees data object.",
-            "schema": {
-              "$ref": "#/definitions/EmployeeModel"
-            }
-          },
-          "404": {
-            "description": "User not found",
-            "type": "string",
-            "example": "User with id ... was not found"
-          }
-        }
       },
       "put": {
-        "summary": "Updates employee",
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Update an existing employee",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Id of users",
-            "required": true,
-            "type": "string"
-          },
           {
             "in": "body",
             "name": "body",
-            "description": "Updated employee object",
+            "description": "Employee object that needs to be updated to the database",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EmployeeModel"
+              "$ref": "#/definitions/Employee"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Ok"
+          "400": {
+            "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "User not found"
+            "description": "Employee not found"
           }
         }
       },
       "delete": {
-        "summary": "Delete employee",
-        "parameters": [
-          {
-            "name": "ID",
-            "in": "path",
-            "description": "Employee ID to delete",
-            "required": true,
-            "type": "string"
-          }
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Deletes a employee",
+        "description": "",
+        "operationId": "deletePet",
+        "produces": [
+          "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "ok"
-          },
           "404": {
-            "description": "User not found"
+            "description": "Pet not found"
           }
         }
       }
     },
-    "/employees/search": {
+    "/employee/search": {
       "get": {
-        "summary": "Allows to execute full text search on database",
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Search for employee",
+        "description": "Allows to execute search on database based on employees firstname, lastname, email",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "in": "query",
-            "name": "orderBy",
-            "description": "Column name + order (firstName;ASC)"
-          },
-          {
-            "in": "query",
-            "name": "pageSize",
-            "description": "Max number of elements",
-            "required": false
-          },
-          {
-            "in": "query",
-            "name": "pageIndex",
-            "description": "Page number",
-            "required": false
-          },
-          {
-            "in": "query",
             "name": "q",
-            "description": "String for full text search on firstName, lastName, email column"
+            "in": "query",
+            "description": "Search term",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of rows to skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Column name to order by eg firstName;ASC",
+            "type": "string",
+            "required": false
           }
         ],
         "responses": {
           "200": {
-            "description": "A Json array of employee objects matching the search query",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AllEmployees"
+              "$ref": "#/definitions/EmployeeSearch"
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+    "/user/auth": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authorize the user",
+        "description": "After successfull authorization returns a jwt token whitch is used in subsequent calls to API",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Credentials object containing username and password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Credentials"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "401": {
+            "description": "wrong password or username"
+          }
+        }
+      }
+    },
+    "/stats/avgSalary": {
+      "get": {
+        "tags": [
+          "Stats"
+        ],
+        "summary": "Average months salary",
+        "description": "Returns a object containing list of avg salaries in each months",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AvgSalaryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/stats/employees": {
+      "get": {
+        "tags": [
+          "Stats"
+        ],
+        "summary": "Informations about employees",
+        "description": "Return object with avg salary for current month and number of all employees",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/EmployeesStatsResponse"
             }
           }
         }
@@ -180,117 +283,97 @@
     }
   },
   "definitions": {
-    "AllEmployees": {
+    "EmployeesStatsResponse": {
+      "type": "object",
+      "properties": {
+        "averageCurrentSalary": {
+          "type": "number"
+        },
+        "employeesCount": {
+          "type": "number"
+        }
+      }
+    },
+    "AvgSalaryResponse": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number"
+              },
+              "monthName": {
+                "type": "string"
+              },
+              "year": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Credentials": {
+      "type": "object",
+      "properties": {
+        "UserName": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthResponse": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "EmployeeSearch": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/EmployeeModel"
-      }
-    },
-    "AddressModel": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "example": 1
-        },
-        "street": {
-          "type": "string",
-          "example": "944-7019 Nascetur Avenue"
-        },
-        "city": {
-          "type": "string",
-          "example": "London"
-        },
-        "country": {
-          "type": "string",
-          "example": "Finland"
-        },
-        "zip": {
-          "type": "string",
-          "example": "34-400"
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "currentSalary": {
+            "type": "number"
+          },
+          "positionsNames": {
+            "type": "string"
+          }
         }
       }
     },
-    "AddressModelAdd": {
+    "Employee": {
       "type": "object",
-      "properties": {
-        "street": {
-          "type": "string",
-          "example": "944-7019 Nascetur Avenue"
-        },
-        "city": {
-          "type": "string",
-          "example": "London"
-        },
-        "country": {
-          "type": "string",
-          "example": "Finland"
-        },
-        "zip": {
-          "type": "string",
-          "example": "34-400"
-        }
-      }
-    },
-    "EmployeeModelAdd": {
-      "type": "object",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "example": "Sherlock"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "Holmes"
-        },
-        "email": {
-          "type": "string",
-          "example": "sherlock.holmes@gmail.com"
-        },
-        "gender": {
-          "type": "string",
-          "example": "MALE"
-        },
-        "position": {
-          "type": "string",
-          "example": "CEO"
-        },
-        "addres": {
-          "$ref": "#/definitions/AddressModelAdd"
-        }
-      }
-    },
-    "EmployeeModel": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "example": 1
-        },
-        "firstName": {
-          "type": "string",
-          "example": "Sherlock"
-        },
-        "lastName": {
-          "type": "string",
-          "example": "Holmes"
-        },
-        "email": {
-          "type": "string",
-          "example": "sherlock.holmes@gmail.com"
-        },
-        "gender": {
-          "type": "string",
-          "example": "MALE"
-        },
-        "position": {
-          "type": "string",
-          "example": "CEO"
-        },
-        "addres": {
-          "$ref": "#/definitions/AddressModel"
-        }
-      }
+      "items": ""
     }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
   }
 }

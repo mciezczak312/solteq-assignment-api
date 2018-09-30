@@ -1,5 +1,5 @@
 ﻿using System;
-using EmployeesManagement.Core.Entitites;
+using EmployeesManagement.Core.Entities;
 
 namespace EmployeesManagement.Core.DTO
 {

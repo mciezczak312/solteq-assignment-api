@@ -1,6 +1,5 @@
-﻿using EmployeesManagement.Core.Entitites;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using EmployeesManagement.Core.Entities;
 
 
 namespace EmployeesManagement.API.Interfaces

@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using EmployeesManagement.Core.Entitites;
+using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Data;
 using EmployeesManagement.Infrastructure.Repositories;
 

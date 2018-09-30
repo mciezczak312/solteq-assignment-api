@@ -12561,11 +12561,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.API\\EmployeesManagement.API.csproj",
+      "projectUniqueName": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.API\\EmployeesManagement.API.csproj",
       "projectName": "EmployeesManagement.API",
-      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.API\\EmployeesManagement.API.csproj",
+      "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.API\\EmployeesManagement.API.csproj",
       "packagesPath": "C:\\Users\\mciez\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.API\\obj\\",
+      "outputPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -12584,11 +12584,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj": {
-              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj"
+            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj": {
+              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Core\\EmployeesManagement.Core.csproj"
             },
-            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj"
+            "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\mciez\\Documents\\repos\\solteq-assignment\\solteq-assignment-api\\EmployeesManagement\\EmployeesManagement.Infrastructure\\EmployeesManagement.Infrastructure.csproj"
             }
           }
         }

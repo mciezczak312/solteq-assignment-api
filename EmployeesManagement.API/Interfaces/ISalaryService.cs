@@ -1,4 +1,4 @@
-﻿using EmployeesManagement.Core.Entitites;
+﻿using EmployeesManagement.Core.Entities;
 
 namespace EmployeesManagement.API.Interfaces
 {

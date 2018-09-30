@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EmployeesManagement.Core.Entitites
+namespace EmployeesManagement.Core.Entities
 {
     public class Employee : BaseEntity
     {
