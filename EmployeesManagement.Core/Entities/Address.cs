@@ -1,15 +1,10 @@
-﻿using System;
-using EmployeesManagement.Core.Entities;
-
-namespace EmployeesManagement.Core.DTO
+﻿namespace EmployeesManagement.Core.Entities
 {
-    public class AddressDTO
+    public class Address : BaseEntity
     {
-        public int Id { get; set; }
         public string Street { get; set; }
         public string Zip { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
-        
     }
 }

@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+
+  api-service:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: solteq-assignment-api-container
+    image: solteq-assignment-api
+    ports:
+      - '9000:80'

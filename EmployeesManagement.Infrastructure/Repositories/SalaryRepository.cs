@@ -1,7 +1,7 @@
-﻿using EmployeesManagement.Core.Entitites;
-using EmployeesManagement.Core.Interfaces;
+﻿using EmployeesManagement.Core.Interfaces;
 using System.Collections.Generic;
 using Dapper;
+using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Data;
 
 namespace EmployeesManagement.Infrastructure.Repositories

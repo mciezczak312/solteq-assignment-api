@@ -1,5 +1,5 @@
 ﻿using EmployeesManagement.API.Interfaces;
-using EmployeesManagement.Core.Entitites;
+using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Repositories;
 
 namespace EmployeesManagement.API.Services

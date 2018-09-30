@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using EmployeesManagement.Core.Entitites;
 using EmployeesManagement.Core.DTO;
+using EmployeesManagement.Core.Entities;
 
 namespace EmployeesManagement.API.Helpers
 {

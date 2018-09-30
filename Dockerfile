@@ -7,8 +7,10 @@ WORKDIR /src
 COPY ["EmployeesManagement.API/EmployeesManagement.API.csproj", "EmployeesManagement.API/"]
 COPY ["EmployeesManagement.Infrastructure/EmployeesManagement.Infrastructure.csproj", "EmployeesManagement.Infrastructure/"]
 COPY ["EmployeesManagement.Core/EmployeesManagement.Core.csproj", "EmployeesManagement.Core/"]
+
+ENV ASPNETCORE_ENVIRONMENT="Production"
+
 RUN dotnet restore "EmployeesManagement.API/EmployeesManagement.API.csproj"
-ENV ASPNETCORE_ENVIRONMENT "Production"
 COPY . .
 WORKDIR "/src/EmployeesManagement.API"
 RUN dotnet build "EmployeesManagement.API.csproj" -c Release -o /app

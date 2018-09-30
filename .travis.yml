@@ -1,0 +1,24 @@
+language: csharp 
+dist: trusty
+mono: none
+dotnet: 2.1
+solution: EmployeesManagement.sln
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION=1.22.0
+
+before_install:  
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
+
+script:
+  - echo "You dont have to run tests if you dont have them"
+
+after_success:
+  - sudo docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+  - sudo docker tag solteq-assignment-api:latest yokken3122/solteq-assignment-api:latest
+  - if [ $TRAVIS_BRANCH == "master" ] && [ $TRAVIS_PULL_REQUEST = "false" ]; then sudo docker push yokken3122/solteq-assignment-api; fi

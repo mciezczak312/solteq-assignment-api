@@ -1,4 +1,4 @@
-﻿using EmployeesManagement.Core.Entitites;
+﻿using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Core.Interfaces;
 using EmployeesManagement.Infrastructure.Data;
 using System;

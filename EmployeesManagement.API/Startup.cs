@@ -8,7 +8,7 @@ using EmployeesManagement.Infrastructure.Data;
 using EmployeesManagement.API.Interfaces;
 using EmployeesManagement.API.Services;
 using EmployeesManagement.Core.Interfaces;
-using EmployeesManagement.Core.Entitites;
+using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Repositories;
 using AutoMapper;
 using EmployeesManagement.API.Helpers;
@@ -83,6 +83,9 @@ namespace EmployeesManagement.API
             services.AddScoped<IRepository<Employee>, EmployeeRepository>();
             services.AddScoped<IRepository<Position>, PositionRepository>();
             services.AddScoped<SalaryRepository, SalaryRepository>();
+            services.AddScoped<IDictionaryRepository, DictionaryRepository>();
+            services.AddScoped<IDictionaryService, DictionaryService>();
+
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();

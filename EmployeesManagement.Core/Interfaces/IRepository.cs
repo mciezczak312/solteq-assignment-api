@@ -1,4 +1,4 @@
-﻿using EmployeesManagement.Core.Entitites;
+﻿using EmployeesManagement.Core.Entities;
 using System.Collections.Generic;
 
 namespace EmployeesManagement.Core.Interfaces
