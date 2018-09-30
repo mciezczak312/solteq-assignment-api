@@ -49,7 +49,6 @@ namespace EmployeesManagement.API.Controllers
             var take = urlQuery.Take == 0 ? 30 : urlQuery.Take;
             urlQuery.OrderBy = urlQuery.OrderBy ?? "firstName ASC";
 
-
             var searchResults= _employeeService.SearchEmployees(urlQuery.Q, urlQuery.Skip, take, urlQuery.OrderBy);
 
             return Ok(searchResults);

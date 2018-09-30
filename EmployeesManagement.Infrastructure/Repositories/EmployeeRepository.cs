@@ -29,7 +29,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
                             where e.id = @Id;", new { Id = id }).AsList<string>();
                 return result;
             }
-            
+
         }
 
         public SearchResponseDto SearchEmployees(string searchTerm, int skip, int take, string orderBy)
@@ -39,15 +39,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
                     join Salary S on Employee.id = S.employee_id
                     left join PositionEmployee E on Employee.id = E.EmployeeID
                     left join Position P on E.PositionId = P.Id
-                    where (current_date() between S.fromDate and S.toDate)
-                    and MATCH(Employee.firstName, Employee.lastName, Employee.email)
-                    AGAINST('@SearchTerm' IN BOOLEAN MODE)
-                    group by Employee.id, S.amount
-                    order by @OrderBy
-                    limit @Skip, @Take;";
-
-            //https://stackoverflow.com/questions/25088183/mysql-fulltext-search-with-symbol-produces-error-syntax-error-unexpected
-            sql = sql.Replace("@SearchTerm", searchTerm);
+                    where (current_date() between S.fromDate and S.toDate)";
 
             var sqlTotalCount = @"
                 select count(*)
@@ -61,12 +53,25 @@ namespace EmployeesManagement.Infrastructure.Repositories
                              join Salary S on Employee.id = S.employee_id
                              left join PositionEmployee E on Employee.id = E.EmployeeID
                              left join Position P on E.PositionId = P.Id
-                      where (current_date() between S.fromDate and S.toDate)
-                        and MATCH(Employee.firstName, Employee.lastName, Employee.email)
-                                AGAINST('@SearchTerm' IN BOOLEAN MODE)
-                      group by Employee.id, S.amount) as TotalCount";
+                      where (current_date() between S.fromDate and S.toDate)";
 
-            sqlTotalCount = sqlTotalCount.Replace("@SearchTerm", searchTerm);
+            if (searchTerm != null)
+            {
+                searchTerm = "%"+searchTerm+"%";
+                var addedSql = @"and (Employee.firstName like '@SearchTerm' or Employee.lastName like '@SearchTerm' or Employee.email like '@SearchTerm')";
+                sql += addedSql;
+                sqlTotalCount += addedSql;
+                
+                sqlTotalCount = sqlTotalCount.Replace("@SearchTerm", searchTerm);
+                sql = sql.Replace("@SearchTerm", searchTerm);
+            }
+            sql += @"
+                    group by Employee.id, S.amount
+                    order by @OrderBy
+                    limit @Skip, @Take;";
+            sql = sql.Replace("@OrderBy", orderBy);
+
+            sqlTotalCount += @"group by Employee.id, S.amount) as TotalCount";
 
             using (var conn = _context.GetConnection())
             {
@@ -88,7 +93,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
 
         }
-        
+
 
         public IEnumerable<Employee> ListAll()
         {
