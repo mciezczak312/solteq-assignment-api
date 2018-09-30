@@ -5,26 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeesManagement.Core.DTO;
 
 namespace EmployeesManagement.API.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IRepository<Employee> _employeeRepository;
-        private readonly IRepository<Position> _positionRepository;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeeService(
-            IRepository<Employee> employeeRepository,
-            IRepository<Position> positionRepository)
+            IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
-            _positionRepository = positionRepository;
         }
+        
 
-        public IEnumerable<Employee> GetAllEmployees(int pageIndex, int pageSize)
+        public SearchResponseDto SearchEmployees(string searchTerm, int skip, int take, string orderBy)
         {
-            var root = _employeeRepository.ListAll();
-            return root.Skip(pageSize * pageIndex).Take(pageSize).ToList();
+            return _employeeRepository.SearchEmployees(searchTerm, skip, take, orderBy);
         }
 
         public Employee GetEmployeeById(int id)

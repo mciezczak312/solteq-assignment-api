@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EmployeesManagement.Core.DTO;
 using EmployeesManagement.Core.Entities;
 
 
@@ -6,7 +7,7 @@ namespace EmployeesManagement.API.Interfaces
 {
     public interface IEmployeeService
     {
-        IEnumerable<Employee> GetAllEmployees(int pageIndex, int pageSize);
+        SearchResponseDto SearchEmployees(string searchTerm,int skip, int take, string orderBy);
         Employee GetEmployeeById(int id);
     }
 }

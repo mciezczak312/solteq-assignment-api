@@ -80,7 +80,7 @@ namespace EmployeesManagement.API
             services.AddScoped<ISalaryService, SalaryService>();
 
             services.AddScoped<IRepository<Address>, AddressRepository>();
-            services.AddScoped<IRepository<Employee>, EmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IRepository<Position>, PositionRepository>();
             services.AddScoped<SalaryRepository, SalaryRepository>();
             services.AddScoped<IDictionaryRepository, DictionaryRepository>();
