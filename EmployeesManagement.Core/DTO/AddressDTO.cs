@@ -1,7 +1,4 @@
-﻿using System;
-using EmployeesManagement.Core.Entities;
-
-namespace EmployeesManagement.Core.DTO
+﻿namespace EmployeesManagement.Core.DTO
 {
     public class AddressDTO
     {

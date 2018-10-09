@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EmployeesManagement.Core.DTO
 {
@@ -8,6 +6,6 @@ namespace EmployeesManagement.Core.DTO
     {
         public IEnumerable<EmployeesSearchResultDto> SearchResults { get; set; }
 
-        public long TotalCount { get; set; }
+        public int TotalCount { get; set; }
     }
 }

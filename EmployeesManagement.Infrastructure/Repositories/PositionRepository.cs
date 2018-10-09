@@ -2,6 +2,7 @@
 using EmployeesManagement.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using Dapper;
 using EmployeesManagement.Core.Entities;
 
@@ -18,11 +19,27 @@ namespace EmployeesManagement.Infrastructure.Repositories
             using (var conn = _context.GetConnection())
             {
                 conn.Open();
+                
                 return conn.QueryFirstOrDefault<Position>("SELECT * FROM Position WHERE Id=@Id", new { Id = id });
             }
         }
 
-        public void Insert(Position item)
+        public int Insert(Position item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Insert(Position item, IDbConnection conn, IDbTransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Position item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Position item, IDbConnection connection, IDbTransaction transaction)
         {
             throw new NotImplementedException();
         }

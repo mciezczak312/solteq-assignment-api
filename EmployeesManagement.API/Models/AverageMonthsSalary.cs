@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EmployeesManagement.API.Models
+﻿namespace EmployeesManagement.API.Models
 {
     public class AverageMonthsSalary
     {

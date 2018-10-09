@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EmployeesManagement.Core.DTO
 {
-    public class EmployeeDTO
+    public class EmployeeDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -12,13 +10,13 @@ namespace EmployeesManagement.Core.DTO
         public string Email { get; set; }
         public string Gender { get; set; }
 
-        public IList<string> PositionsNames { get; set; }
+        public IList<int> PositionsNamesIds { get; set; }
         public AddressDTO Address { get; set; }
         public SalaryDTO Salary { get; set; }
 
-        public EmployeeDTO()
+        public EmployeeDto()
         {
-            PositionsNames = new List<string>();
+            PositionsNamesIds = new List<int>();
         }
 
     }

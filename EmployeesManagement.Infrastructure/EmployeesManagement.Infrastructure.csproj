@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="EasyEncryption" Version="1.0.2" />
     <PackageReference Include="MySql.Data" Version="8.0.12" />
   </ItemGroup>
 

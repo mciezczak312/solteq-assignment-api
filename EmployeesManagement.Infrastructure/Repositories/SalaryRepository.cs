@@ -1,5 +1,7 @@
 ﻿using EmployeesManagement.Core.Interfaces;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Dapper;
 using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Data;
@@ -21,24 +23,51 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-        public void Insert(Salary item)
+        public int Insert(Salary item)
         {
-            using (var conn = _context.GetConnection())
-            {
-                var sql = @"INSERT INTO `Salary` (`amount`, `employee_id`, `fromDate`, `toDate`) 
-                            VALUES (@Amount, @EmployeeId, @FromDate, @ToDate);";
+            var sql = @"INSERT INTO `Salary` (`amount`, `employee_id`, `fromDate`, `toDate`) 
+                        VALUES (@Amount, @EmployeeId, @FromDate, @ToDate);
+                        SELECT LAST_INSERT_ID()";
 
-                conn.Open();
-                conn.Execute(sql,
+            using (var connection = _context.GetConnection())
+            {
+                connection.Open();
+                return connection.Query<int>(sql,
                     new
                     {
                         item.Amount,
                         item.EmployeeId,
                         item.FromDate,
                         item.ToDate
-                    });
-
+                    }).Single();
             }
+        }
+
+        public int Insert(Salary item, IDbConnection connection, IDbTransaction transaction)
+        {
+
+            var sql = @"INSERT INTO `Salary` (`amount`, `employee_id`, `fromDate`, `toDate`) 
+                        VALUES (@Amount, @EmployeeId, @FromDate, @ToDate);
+                        SELECT LAST_INSERT_ID()";
+
+            return connection.Query<int>(sql,
+                new
+                {
+                    item.Amount,
+                    item.EmployeeId,
+                    item.FromDate,
+                    item.ToDate
+                }, transaction).Single();
+        }
+
+        public int Update(Salary item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Update(Salary item, IDbConnection connection, IDbTransaction transaction)
+        {
+            throw new System.NotImplementedException();
         }
 
         public Salary GetByEmployeeId(int employeeId)
@@ -46,7 +75,13 @@ namespace EmployeesManagement.Infrastructure.Repositories
             using (var conn = _context.GetConnection())
             {
                 conn.Open();
-                return conn.QueryFirstOrDefault<Salary>("SELECT * FROM Salary WHERE employee_id=@Id", new { Id = employeeId });
+                return conn.QueryFirstOrDefault<Salary>(@"
+                            select amount as Amount, min(fromDate) as FromDate, max(toDate) as ToDate
+                                from Salary
+                            where employee_id = @Id
+                            group by amount
+                            order by FromDate desc
+                            limit 1;", new { Id = employeeId });
             }
         }
 

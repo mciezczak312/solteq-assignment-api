@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using EmployeesManagement.API.Interfaces;
 using EmployeesManagement.API.Models;
 using EmployeesManagement.Core.Interfaces;
@@ -21,34 +21,40 @@ namespace EmployeesManagement.API.Services
         public IEnumerable<AverageMonthsSalary> GetAverageMonthsSalary()
         {
             var obj = _repository.ExecuteSql(@"
-                    select sum(Salary.amount) / count(distinct employee_id) as Amount, 
-                            MONTHNAME(fromDate) as Monthname, YEAR(fromDate) as Year 
+                    select sum(Salary.amount) / count(distinct employee_id) as Amount,
+                           EXTRACT(MONTH from fromDate)                     as MonthNumber,
+                           EXTRACT(YEAR from fromDate)                      as Year
                     from Salary
-                    group by Date(fromDate), fromDate;");
+                    group by EXTRACT(MONTH from fromDate), EXTRACT(YEAR from fromDate)
+                    order by Year, MonthNumber;");
 
-            return obj.Select(x => new AverageMonthsSalary()
+            return obj.Select(x => new AverageMonthsSalary
             {
                 Amount = x.Amount,
-                MonthName = x.Monthname,
+                MonthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName((int)x.MonthNumber),
                 Year = x.Year
             }).ToList();
         }
 
         public EmployeesStats GetEmployeesStats()
         {
-            var obj = _repository.ExecuteSql(@"
-                    select avg(Salary.amount) as AverageSalary, count(distinct E.id) as EmployeesCount 
+            var avgSalary = _repository.ExecuteSql(@"
+                    select avg(Salary.amount) as AverageSalary
                     from Salary
                     left join Employee E on Salary.employee_id = E.id
                     where (CURRENT_DATE() between Salary.fromDate and Salary.toDate);").FirstOrDefault();
 
-            if (obj == null)
-                throw new ArgumentException();
+            var employeesCountResult = _repository.ExecuteSql(@"SELECT COUNT(*) as EmployeesCount from Employee").FirstOrDefault();
 
-            return new EmployeesStats()
+            if (avgSalary == null || employeesCountResult == null)
             {
-                AverageCurrentSalary = obj.AverageSalary,
-                EmployeesCount = obj.EmployeesCount
+                throw new ArgumentException();
+            }
+
+            return new EmployeesStats
+            {
+                AverageCurrentSalary = avgSalary.AverageSalary,
+                EmployeesCount = employeesCountResult.EmployeesCount
             };
         }
     }

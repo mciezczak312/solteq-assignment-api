@@ -24,7 +24,10 @@ namespace EmployeesManagement.API.Controllers
             var token = _userService.Authenticate(userParam.Username, userParam.Password);
 
             if (token == null)
+            {
                 return BadRequest(new { message = "Username or password is incorrect" });
+            }
+                
             var authResponse = new AuthResponse
             {
                 Token = token,
