@@ -6,11 +6,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Dapper;
 using EmployeesManagement.Core.DTO;
 using EmployeesManagement.Infrastructure.Helpers;
-using MySql.Data.MySqlClient;
 
 namespace EmployeesManagement.Infrastructure.Repositories
 {
@@ -99,7 +97,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
 
                 var totalCount = conn.Query<int>(sqlTotalCount, new { SearchTerm = searchTerm }).FirstOrDefault();
 
-                return new SearchResponseDto()
+                return new SearchResponseDto
                 {
                     SearchResults = result,
                     TotalCount = totalCount
@@ -269,7 +267,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
                 item.LastName,
                 item.Email,
                 item.Gender,
-                Id = item.Id
+                item.Id
             }, transaction);
         }
 

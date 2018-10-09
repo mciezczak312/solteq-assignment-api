@@ -3,8 +3,6 @@ using Dapper;
 using EmployeesManagement.API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace EmployeesManagement.API.Controllers
 {
@@ -13,7 +11,7 @@ namespace EmployeesManagement.API.Controllers
     [Authorize]
     public class StatsController : ControllerBase
     {
-        private IStatsService _statsService;
+        private readonly IStatsService _statsService;
 
         public StatsController(IStatsService service)
         {

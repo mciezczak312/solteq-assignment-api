@@ -5,7 +5,6 @@ using System.Data;
 using System.Linq;
 using Dapper;
 using EmployeesManagement.Core.Entities;
-using MySql.Data.MySqlClient;
 
 namespace EmployeesManagement.Infrastructure.Repositories
 {
@@ -24,40 +23,46 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-        public int Insert(Address item, IDbConnection conn = null, IDbTransaction transaction = null)
+        public int Insert(Address item)
         {
-            var connection = conn ?? _context.GetConnection();
-
             var sql = @"INSERT INTO `Address` (`street`, `city`, `zip`, `country`) 
                             VALUES (@Street, @City, @Zip, @Country);
                             SELECT LAST_INSERT_ID()";
-
-            if (transaction != null)
-                return connection.Query<int>(sql,
+            using (var conn = _context.GetConnection())
+            {
+                conn.Open();
+                return conn.Query<int>(sql,
                     new
                     {
                         item.Street,
                         item.City,
                         item.Zip,
                         item.Country
-                    }, transaction).Single();
+                    }).Single();
+            }
 
-            var res = connection.Query<int>(sql,
+        }
+
+        public int Insert(Address item, IDbConnection conn, IDbTransaction transaction)
+        {
+
+            var sql = @"INSERT INTO `Address` (`street`, `city`, `zip`, `country`) 
+                            VALUES (@Street, @City, @Zip, @Country);
+                            SELECT LAST_INSERT_ID()";
+
+
+            return conn.Query<int>(sql,
                 new
                 {
                     item.Street,
                     item.City,
                     item.Zip,
                     item.Country
-                }).Single();
-            connection.Close();
-            return res;
-
+                }, transaction).Single();
         }
 
-        public int Update(Address item, IDbConnection connection = null, IDbTransaction transaction = null)
+        public int Update(Address item)
         {
-            var conn = connection ?? _context.GetConnection();
             var sql = @"UPDATE Address
                         SET Address.city    = @City,
                             Address.street  = @Street,
@@ -65,8 +70,10 @@ namespace EmployeesManagement.Infrastructure.Repositories
                             Address.zip     = @Zip
                         WHERE Address.id = @Id;";
 
-            if (transaction != null)
-                return connection.Execute(sql,
+            using (var conn = _context.GetConnection())
+            {
+                conn.Open();
+                return conn.Execute(sql,
                     new
                     {
                         item.Street,
@@ -74,29 +81,39 @@ namespace EmployeesManagement.Infrastructure.Repositories
                         item.Zip,
                         item.Country,
                         item.Id
-                    }, transaction);
+                    });
+            }
 
-            var res = connection.Execute(sql,
+        }
+
+        public int Update(Address item, IDbConnection connection, IDbTransaction transaction)
+        {
+            var sql = @"UPDATE Address
+                        SET Address.city    = @City,
+                            Address.street  = @Street,
+                            Address.country = @Country,
+                            Address.zip     = @Zip
+                        WHERE Address.id = @Id;";
+
+
+            return connection.Execute(sql,
                 new
                 {
                     item.Street,
                     item.City,
                     item.Zip,
-                    item.Country
-                });
-            conn.Close();
-            return res;
-
-
+                    item.Country,
+                    item.Id
+                }, transaction);
         }
 
         public IEnumerable<Address> ListAll()
-    {
-        using (var conn = _context.GetConnection())
         {
-            conn.Open();
-            return conn.Query<Address>("SELECT * FROM Address");
+            using (var conn = _context.GetConnection())
+            {
+                conn.Open();
+                return conn.Query<Address>("SELECT * FROM Address");
+            }
         }
     }
-}
 }

@@ -8,7 +8,9 @@ namespace EmployeesManagement.Core.Interfaces
     {
         IEnumerable<T> ListAll();
         T GetById(int id);
-        int Insert(T item, IDbConnection connection, IDbTransaction transaction = null);
-        int Update(T item, IDbConnection connection = null, IDbTransaction transaction = null);
+        int Insert(T item);
+        int Insert(T item, IDbConnection connection, IDbTransaction transaction);
+        int Update(T item);
+        int Update(T item, IDbConnection connection, IDbTransaction transaction);
     }
 }

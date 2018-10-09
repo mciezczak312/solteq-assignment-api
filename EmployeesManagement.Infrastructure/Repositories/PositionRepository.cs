@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using EmployeesManagement.Core.Entities;
-using MySql.Data.MySqlClient;
 
 namespace EmployeesManagement.Infrastructure.Repositories
 {
@@ -25,12 +24,22 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-        public int Insert(Position item, IDbConnection conn = null, IDbTransaction transaction = null)
+        public int Insert(Position item)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(Position item, IDbConnection connection = null, IDbTransaction transaction = null)
+        public int Insert(Position item, IDbConnection conn, IDbTransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Position item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Update(Position item, IDbConnection connection, IDbTransaction transaction)
         {
             throw new NotImplementedException();
         }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EmployeesManagement.Infrastructure
 {
     public static class Constants
     {
-        public static Dictionary<string, string> OrderableColumnsNamesWhitelist = new Dictionary<string, string>()
+        public static readonly Dictionary<string, string> OrderableColumnsNamesWhitelist = new Dictionary<string, string>
         {
             {"firstName", "firstName" },
             {"lastName", "lastName" },

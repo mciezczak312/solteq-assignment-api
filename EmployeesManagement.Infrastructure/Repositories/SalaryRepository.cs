@@ -5,7 +5,6 @@ using System.Linq;
 using Dapper;
 using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Infrastructure.Data;
-using MySql.Data.MySqlClient;
 
 namespace EmployeesManagement.Infrastructure.Repositories
 {
@@ -24,29 +23,16 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-        public int Insert(Salary item, IDbConnection connection = null, IDbTransaction transaction = null)
+        public int Insert(Salary item)
         {
-            var conn = connection ?? _context.GetConnection();
-            
             var sql = @"INSERT INTO `Salary` (`amount`, `employee_id`, `fromDate`, `toDate`) 
                         VALUES (@Amount, @EmployeeId, @FromDate, @ToDate);
                         SELECT LAST_INSERT_ID()";
-            if (transaction != null)
+
+            using (var connection = _context.GetConnection())
             {
-                var res = conn.Query<int>(sql,
-                    new
-                    {
-                        item.Amount,
-                        item.EmployeeId,
-                        item.FromDate,
-                        item.ToDate
-                    }, transaction).Single();
-                return res;
-            }
-            else
-            {
-                conn.Open();
-                var res = conn.Query<int>(sql,
+                connection.Open();
+                return connection.Query<int>(sql,
                     new
                     {
                         item.Amount,
@@ -54,16 +40,32 @@ namespace EmployeesManagement.Infrastructure.Repositories
                         item.FromDate,
                         item.ToDate
                     }).Single();
-
-                conn.Close();
-                return res;
             }
-                
-
-            
         }
 
-        public int Update(Salary item, IDbConnection connection = null, IDbTransaction transaction = null)
+        public int Insert(Salary item, IDbConnection connection, IDbTransaction transaction)
+        {
+
+            var sql = @"INSERT INTO `Salary` (`amount`, `employee_id`, `fromDate`, `toDate`) 
+                        VALUES (@Amount, @EmployeeId, @FromDate, @ToDate);
+                        SELECT LAST_INSERT_ID()";
+
+            return connection.Query<int>(sql,
+                new
+                {
+                    item.Amount,
+                    item.EmployeeId,
+                    item.FromDate,
+                    item.ToDate
+                }, transaction).Single();
+        }
+
+        public int Update(Salary item)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int Update(Salary item, IDbConnection connection, IDbTransaction transaction)
         {
             throw new System.NotImplementedException();
         }

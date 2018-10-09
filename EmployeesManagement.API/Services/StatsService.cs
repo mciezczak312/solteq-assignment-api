@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using EmployeesManagement.API.Interfaces;
 using EmployeesManagement.API.Models;
 using EmployeesManagement.Core.Interfaces;
@@ -29,7 +28,7 @@ namespace EmployeesManagement.API.Services
                     group by EXTRACT(MONTH from fromDate), EXTRACT(YEAR from fromDate)
                     order by Year, MonthNumber;");
 
-            return obj.Select(x => new AverageMonthsSalary()
+            return obj.Select(x => new AverageMonthsSalary
             {
                 Amount = x.Amount,
                 MonthName = CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName((int)x.MonthNumber),
@@ -48,9 +47,11 @@ namespace EmployeesManagement.API.Services
             var employeesCountResult = _repository.ExecuteSql(@"SELECT COUNT(*) as EmployeesCount from Employee").FirstOrDefault();
 
             if (avgSalary == null || employeesCountResult == null)
+            {
                 throw new ArgumentException();
+            }
 
-            return new EmployeesStats()
+            return new EmployeesStats
             {
                 AverageCurrentSalary = avgSalary.AverageSalary,
                 EmployeesCount = employeesCountResult.EmployeesCount

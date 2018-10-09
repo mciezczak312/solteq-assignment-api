@@ -28,13 +28,15 @@ namespace EmployeesManagement.API.Services
             var authenticated = _userRepository.CheckCredentials(userName, password);
 
             if (!authenticated)
+            {
                 return null;
+            }   
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, userName)
                 }),

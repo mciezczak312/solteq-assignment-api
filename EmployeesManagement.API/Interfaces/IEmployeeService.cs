@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using EmployeesManagement.Core.DTO;
+﻿using EmployeesManagement.Core.DTO;
 using EmployeesManagement.Core.Entities;
 
 

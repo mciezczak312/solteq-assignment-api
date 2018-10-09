@@ -1,9 +1,7 @@
 ﻿using EmployeesManagement.API.Interfaces;
 using EmployeesManagement.Core.Entities;
 using EmployeesManagement.Core.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using EmployeesManagement.Core.DTO;
 
@@ -49,7 +47,7 @@ namespace EmployeesManagement.API.Services
 
             while (dateTmpFrom.AddMonths(1) <= salaryObj.ToDate)
             {   
-                salaryList.Add(new Salary()
+                salaryList.Add(new Salary
                 {
                     FromDate = dateTmpFrom,
                     ToDate = dateTmpFrom.AddMonths(1),

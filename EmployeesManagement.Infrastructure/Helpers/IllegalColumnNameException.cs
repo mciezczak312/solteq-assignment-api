@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace EmployeesManagement.Infrastructure.Helpers
 {
     [Serializable]
-    internal class IllegalColumnNameException : Exception
+    public class IllegalColumnNameException : Exception
     {
         public IllegalColumnNameException()
         {

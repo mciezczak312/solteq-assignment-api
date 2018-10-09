@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using EmployeesManagement.API.Helpers;
 using EmployeesManagement.API.Interfaces;
 using EmployeesManagement.Core.DTO;

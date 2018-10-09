@@ -15,7 +15,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
 
         public bool CheckCredentials(string userName, string password)
         {
-            var passwordHash = Encoding.ASCII.GetBytes(password).ToMd5Hash();
+            var passwordHash = Encoding.ASCII.GetBytes(password).ToSHA256Hash();
 
             using (var conn = _context.GetConnection())
             {
@@ -23,7 +23,7 @@ namespace EmployeesManagement.Infrastructure.Repositories
                 var user = conn.QueryFirstOrDefault(@"
                         select * from User
                         where userName = @userName
-                        and passwordHash = @passwordHash", new {userName = userName, passwordHash = passwordHash});
+                        and passwordHash = @passwordHash", new {userName, passwordHash});
                 return user != null;
 
             }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Dapper;
 using EmployeesManagement.Core.Interfaces;
 using EmployeesManagement.Infrastructure.Data;

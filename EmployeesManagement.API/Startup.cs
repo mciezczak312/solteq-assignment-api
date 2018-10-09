@@ -14,7 +14,6 @@ using AutoMapper;
 using EmployeesManagement.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Serialization;
 
 namespace EmployeesManagement.API
 {
