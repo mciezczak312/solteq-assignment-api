@@ -1,0 +1,47 @@
+version: '2.0'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes: 
+      - /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: solteq
+    ports: 
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9001:8080
+
+  angular-service:
+    image: yokken3122/solteq-assignment-front:latest
+    container_name: solteq-assignment-front-container
+    ports:
+      - '80:80'
+
+  api-service:
+    image: yokken3122/solteq-assignment-api:latest
+    container_name: solteq-assignment-api-container
+    ports:
+      - '9000:80'
+    links:
+      - db
+    depends_on:
+      - 'db'
+  
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swager-ui-container
+    ports:
+      - 9002:8080
+    environment:
+      - API_URL="http://solteq-assignment.mciezczak.pl:9000/swagger.json"

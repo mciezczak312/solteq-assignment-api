@@ -9,8 +9,8 @@ namespace EmployeesManagement.API.Helpers
         public MappingProfile()
         {
             
-            CreateMap<Employee, EmployeeDTO>();
-            CreateMap<EmployeeDTO, Employee>();
+            CreateMap<Employee, EmployeeDto>();
+            CreateMap<EmployeeDto, Employee>();
 
             CreateMap<Address, AddressDTO>();
             CreateMap<AddressDTO, Address>();

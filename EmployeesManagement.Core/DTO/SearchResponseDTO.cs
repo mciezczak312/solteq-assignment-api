@@ -8,6 +8,6 @@ namespace EmployeesManagement.Core.DTO
     {
         public IEnumerable<EmployeesSearchResultDto> SearchResults { get; set; }
 
-        public long TotalCount { get; set; }
+        public int TotalCount { get; set; }
     }
 }

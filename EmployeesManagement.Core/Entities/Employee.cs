@@ -13,11 +13,11 @@ namespace EmployeesManagement.Core.Entities
 
         //navigation properties
 
-        public IList<string> PositionsNames { get; set; }
+        public IList<int> PositionsNamesIds { get; set; }
 
         public Employee()
         {
-            PositionsNames = new List<string>();
+            PositionsNamesIds = new List<int>();
         }
 
     }
