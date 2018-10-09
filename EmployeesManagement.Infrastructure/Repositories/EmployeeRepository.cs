@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Dapper;
 using EmployeesManagement.Core.DTO;
@@ -176,7 +177,6 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-
         public IEnumerable<Employee> ListAll()
         {
             var sql = "SELECT * FROM Employee";
@@ -218,20 +218,16 @@ namespace EmployeesManagement.Infrastructure.Repositories
 
         private static string ReplaceOrderByParameter(string sql, string orderColumnName, string orderDirectionStr)
         {
-            Enum.TryParse(orderDirectionStr.ToUpper(), out Constants.OrderDirection orderDirection);
+            Enum.TryParse(orderDirectionStr.ToUpperInvariant(), out Constants.OrderDirection orderDirection);
             switch (orderDirection)
             {
                 case Constants.OrderDirection.ASC:
-                    sql = sql.Replace("@OrderBy", orderColumnName + " ASC");
-                    break;
+                    return sql.Replace("@OrderBy", orderColumnName + " ASC");
                 case Constants.OrderDirection.DESC:
-                    sql = sql.Replace("@OrderBy", orderColumnName + " DESC");
-                    break;
+                    return sql.Replace("@OrderBy", orderColumnName + " DESC");
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-
-            return sql;
         }
 
         #endregion
