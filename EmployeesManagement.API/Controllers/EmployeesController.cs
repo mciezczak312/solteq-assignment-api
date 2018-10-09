@@ -64,6 +64,7 @@ namespace EmployeesManagement.API.Controllers
         public IActionResult GetSearchResults([FromQuery] SearchUrlQuery urlQuery)
         {
             var take = urlQuery.Take == 0 ? 30 : urlQuery.Take;
+
             urlQuery.OrderBy = urlQuery.OrderBy ?? "firstName;ASC";
 
             var searchResults= _employeeService.SearchEmployees(urlQuery.Q, urlQuery.Skip, take, urlQuery.OrderBy);

@@ -178,7 +178,6 @@ namespace EmployeesManagement.Infrastructure.Repositories
             }
         }
 
-
         public IEnumerable<Employee> ListAll()
         {
             var sql = "SELECT * FROM Employee";
