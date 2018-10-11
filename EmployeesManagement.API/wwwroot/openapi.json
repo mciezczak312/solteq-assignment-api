@@ -1,0 +1,476 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Documentaion for Employee management api.",
+    "version": "1.0.0",
+    "title": "EMS"
+  },
+  "tags": [
+    {
+      "name": "Employees",
+      "description": "Employees endpoints"
+    },
+    {
+      "name": "Stats",
+      "description": "Access to employees statistics like average salary"
+    },
+    {
+      "name": "User",
+      "description": "Authentication endpoint"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/employee/{employeeId}": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Find employee by ID",
+        "description": "Returns a single employee object",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "description": "ID of employee to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Employee"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Update an existing employee",
+        "description": "",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "description": "ID of employee to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            }
+          },
+          "description": "Employee object that needs to be updated in the database",
+          "required": true
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employees"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "description": "ID of employee to return",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "summary": "Deletes a employee",
+        "description": "",
+        "operationId": "deletePet",
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+    "/employee": {
+      "post": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Add a new employee to the database",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "Employee added"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Employee"
+              }
+            }
+          },
+          "description": "Employee object that needs to be added to the database",
+          "required": true
+        }
+      }
+    },
+    "/employee/search": {
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Search for employee",
+        "description": "Allows to execute search on database based on employees firstname, lastname, email",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search term",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "take",
+            "in": "query",
+            "description": "Page size",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of rows to skip",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Column name to order by eg firstName;ASC",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeeSearch"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+    "/user/auth": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Authenticate the user",
+        "description": "After successfull authentication returns a JWT token which is used in subsequent calls to API",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Wrong password or username"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credentials"
+              }
+            }
+          },
+          "description": "Credentials object containing username and password",
+          "required": true
+        }
+      }
+    },
+    "/stats/avgSalary": {
+      "get": {
+        "tags": [
+          "Stats"
+        ],
+        "summary": "Average months salary",
+        "description": "Returns a object containing list of avg salaries in each months",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvgSalaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/employees": {
+      "get": {
+        "tags": [
+          "Stats"
+        ],
+        "summary": "Informations about employees",
+        "description": "Return object with avg salary for current month and number of all employees",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmployeesStatsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EmployeesStatsResponse": {
+        "type": "object",
+        "properties": {
+          "averageCurrentSalary": {
+            "type": "number"
+          },
+          "employeesCount": {
+            "type": "number"
+          }
+        }
+      },
+      "AvgSalaryResponse": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "type": "number"
+                },
+                "monthName": {
+                  "type": "string"
+                },
+                "year": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Credentials": {
+        "type": "object",
+        "properties": {
+          "UserName": {
+            "type": "string"
+          },
+          "Password": {
+            "type": "string"
+          }
+        }
+      },
+      "AuthResponse": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "EmployeeSearch": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "currentSalary": {
+              "type": "number"
+            },
+            "positionsNames": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "1"
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Mateusz"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Ciezczak"
+          },
+          "email": {
+            "type": "string",
+            "example": "email@gmail.com"
+          },
+          "gender": {
+            "type": "string",
+            "example": "MALE"
+          },
+          "positionsNamesIds": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "salary": {
+            "$ref": "#/components/schemas/Salary"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "street": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "number"
+          },
+          "country": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          }
+        }
+      },
+      "Salary": {
+        "type": "object",
+        "properties": {
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "http://solteq-assignment.mciezczak.pl:9000/api"
+    }
+  ]
+}

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeesManagement.Core", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeesManagement.Infrastructure", "EmployeesManagement.Infrastructure\EmployeesManagement.Infrastructure.csproj", "{973C08EF-BC7D-4295-8B59-A6BCF3A8E09C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Tools", "EmployeeManagement.Tools\EmployeeManagement.Tools.csproj", "{CF7A17F9-DBD1-492E-BAD5-B7BA63F1D591}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{973C08EF-BC7D-4295-8B59-A6BCF3A8E09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{973C08EF-BC7D-4295-8B59-A6BCF3A8E09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{973C08EF-BC7D-4295-8B59-A6BCF3A8E09C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CF7A17F9-DBD1-492E-BAD5-B7BA63F1D591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF7A17F9-DBD1-492E-BAD5-B7BA63F1D591}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF7A17F9-DBD1-492E-BAD5-B7BA63F1D591}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF7A17F9-DBD1-492E-BAD5-B7BA63F1D591}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
