@@ -32,7 +32,7 @@ This is a very simplified database for employee management system. I am aware th
 Because my system is based on docker it is very easy to run it locally. You need docker and docker-compose. In deploy folder, you can find a docker-compose file. To run it just use:
 
 ```sh
-docker-compose up
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
 Then you can go to localhost and open frontend app.
