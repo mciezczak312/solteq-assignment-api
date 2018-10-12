@@ -8,7 +8,7 @@ COPY ["EmployeesManagement.API/EmployeesManagement.API.csproj", "EmployeesManage
 COPY ["EmployeesManagement.Infrastructure/EmployeesManagement.Infrastructure.csproj", "EmployeesManagement.Infrastructure/"]
 COPY ["EmployeesManagement.Core/EmployeesManagement.Core.csproj", "EmployeesManagement.Core/"]
 
-ENV ASPNETCORE_ENVIRONMENT="Production"
+ENV ASPNETCORE_ENVIRONMENT="Development"
 
 RUN dotnet restore "EmployeesManagement.API/EmployeesManagement.API.csproj"
 COPY . .

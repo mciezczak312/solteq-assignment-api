@@ -13,6 +13,7 @@ using EmployeesManagement.Infrastructure.Repositories;
 using AutoMapper;
 using EmployeesManagement.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EmployeesManagement.API
@@ -93,7 +94,7 @@ namespace EmployeesManagement.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -109,6 +110,9 @@ namespace EmployeesManagement.API
 
             app.UseStaticFiles();
 
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug(LogLevel.Trace);
+            loggerFactory.AddFile("Logs/ems-logs-{Date}.txt");
 
             app.UseMvc();
         }

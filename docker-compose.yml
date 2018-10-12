@@ -5,8 +5,14 @@ services:
   api-service:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./Dockerfile.prod
     container_name: solteq-assignment-api-container
     image: solteq-assignment-api
     ports:
       - '9000:80'
+    volumes:
+      - ./Logs:/app/Logs
+
+
+volumes:
+  Logs:
