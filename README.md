@@ -32,7 +32,7 @@ This is a very simplified database for employee management system. I am aware th
 Because my system is based on docker it is very easy to run it locally. You need docker and docker-compose. In deploy folder, you can find a docker-compose file. To run it just use:
 
 ```sh
-docker-compose up
+docker-compose -f docker-compose.prod.yml up -d
 ```
 
 Then you can go to localhost and open frontend app.
@@ -46,7 +46,7 @@ Then you need to import database. The dump file is also in deploy folder.
 
 ## CI
 
-Before every pull request or change on any branch, Travis CI pipeline triggers builds docker images and run tests. For the frontend, I also added codebeat that checks the style of code.
+Before every pull request or change on any branch, Travis CI pipeline triggers, it builds docker images and run tests. For the frontend, I also added codebeat for the static code analysis.
 For every change on the master branch, Travis also pushes new Docker images to my docker hub repos and tags them as latest.
 
 ## User authentication
